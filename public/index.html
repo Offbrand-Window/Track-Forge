@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Track Forge</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="workspace">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Spotify Local Files Prep</p>
+            <h1>Track Forge</h1>
+          </div>
+          <div class="topbar-actions">
+            <div class="status-pill" id="sourceStatus">No audio source</div>
+            <button id="quitButton" class="quiet-button" type="button">Quit</button>
+          </div>
+        </header>
+
+        <section class="band source-band" aria-labelledby="sourceTitle">
+          <div class="section-heading">
+            <h2 id="sourceTitle">Audio Source</h2>
+            <p>Use audio you own, created, or have permission to import.</p>
+          </div>
+          <div class="source-grid">
+            <label class="drop-zone">
+              <input id="fileInput" type="file" accept="audio/mpeg,.mp3" />
+              <span class="drop-icon">+</span>
+              <strong>Upload MP3</strong>
+              <small id="uploadLabel">Choose a file from this computer</small>
+            </label>
+            <form id="urlForm" class="source-form">
+              <label for="audioUrl">Direct audio URL</label>
+              <div class="inline-fields">
+                <input id="audioUrl" type="url" placeholder="https://example.com/track.mp3" />
+                <button type="submit">Import</button>
+              </div>
+              <label class="check-row">
+                <input id="rightsConfirmed" type="checkbox" />
+                <span>I have the right to download and import this audio.</span>
+              </label>
+            </form>
+            <form id="mediaToolForm" class="source-form media-tool-form">
+              <label for="mediaToolUrl">YouTube/media URL</label>
+              <div class="inline-fields">
+                <input id="mediaToolUrl" type="url" placeholder="YouTube, SoundCloud, Vimeo..." />
+                <button type="submit">Fetch</button>
+              </div>
+              <label for="rightsBasis">Rights basis</label>
+              <select id="rightsBasis">
+                <option value="">Select one</option>
+                <option value="ownWork">My own upload or work</option>
+                <option value="licensed">Licensed download</option>
+                <option value="publicDomain">Public domain</option>
+                <option value="creativeCommons">Creative Commons</option>
+                <option value="permission">Permission from rightsholder</option>
+              </select>
+              <label class="check-row">
+                <input id="mediaToolRightsConfirmed" type="checkbox" />
+                <span>This is not a third-party copyrighted track I lack permission to download.</span>
+              </label>
+            </form>
+          </div>
+        </section>
+
+        <section class="band editor-band" aria-labelledby="editorTitle">
+          <div class="section-heading">
+            <h2 id="editorTitle">Tag Editor</h2>
+            <p>Paste a Genius page or another metadata source, then refine the tags.</p>
+          </div>
+          <div class="editor-layout">
+            <div class="art-panel">
+              <img id="coverPreview" alt="Cover preview" src="" hidden />
+              <div class="art-placeholder" id="artPlaceholder">Cover</div>
+            </div>
+            <form id="tagForm" class="tag-form">
+              <label>Metadata source URL<input id="metadataUrl" type="url" placeholder="Genius song page URL" /></label>
+              <button id="metadataButton" type="button">Scrape Metadata</button>
+              <div class="field-grid">
+                <label>Title<input id="title" name="title" /></label>
+                <label>Artist<input id="artist" name="artist" /></label>
+                <label>Album<input id="album" name="album" /></label>
+                <label>Year<input id="year" name="year" inputmode="numeric" /></label>
+                <label>Track<input id="track" name="track" /></label>
+                <label>Genre<input id="genre" name="genre" /></label>
+              </div>
+              <label>Artwork URL<input id="artworkUrl" name="artworkUrl" placeholder="https://..." /></label>
+              <label>Comment<textarea id="comments" name="comments" rows="3"></textarea></label>
+              <button id="exportButton" class="primary" type="submit" disabled>Export Tagged MP3</button>
+            </form>
+          </div>
+        </section>
+
+        <section id="downloadPanel" class="download-panel" hidden>
+          <div>
+            <h2>Finished File</h2>
+            <p>Download this MP3, then add its folder in Spotify under Settings > Local Files.</p>
+          </div>
+          <a id="downloadLink" class="download-button" href="#">Download</a>
+        </section>
+      </section>
+    </main>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>

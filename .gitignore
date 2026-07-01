@@ -1,0 +1,8 @@
+.DS_Store
+node_modules/
+data/
+outputs/
+work/
+npm-debug.log*
+pnpm-debug.log*
+.env
